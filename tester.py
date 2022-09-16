@@ -25,15 +25,15 @@ def main():
 	# Arguments parsing
 	noexe = False
 	length = len(sys.argv)
-	help_msg = "Error: not enough arguments\nUsage:\tpython3 numlist_gen.py <values amount>: creates file 'input' which can be used in the terminal with ./push_swap $(cat input)\n\tpython3 numlist_gen.py <values amount> <push_swap path> <checker path>: run your push_swap output through the checker"
+	help_msg = "Error: not enough arguments\nUsage:\tpython3 tester.py <values amount>: prints the desired amount of random numbers without duplicates\n\tpython3 tester.py <values amount> <push_swap path> <checker path>: run your push_swap output through the checker"
 	if length < 2:
 		print(help_msg)
-		exit(0)
+		raise Exception
 	elif length < 3:
 		noexe = True
 	elif length < 4:
 		print(help_msg)
-		exit(0)
+		raise Exception
 	else:
 		push_swap_path = str_to_path(str(sys.argv[2]))
 		checker_path = str_to_path(str(sys.argv[3]))
@@ -43,9 +43,7 @@ def main():
 		args = ""
 		for n in array:
 			args = args + str(n) + " "
-		with open("input", "w+") as f:
-			f.write(args.rstrip())
-			f.close()
+		print(args.rstrip())
 	else:
 		array.insert(0, push_swap_path)
 		out, _ = subprocess.Popen(array, stdout=subprocess.PIPE).communicate()
@@ -58,5 +56,5 @@ if __name__ == "__main__":
 	try:
 		main()
 	except:
-		print("\nProcess interrupted by the user")
+		print("\nProcess interrupted")
 		exit(0)
