@@ -7,4 +7,4 @@ or for a more in-depth debugging it can generate and print a specified amount of
 
 ## Usage
     python3 tester.py <values amount>: prints the desired amount of random numbers without duplicates
-    python3 tester.py <values amount> <push_swap path> <checker path>: generates numbers and run your push_swap output through the checker with them as argument
+    python3 tester.py <push_swap path> <checker path> <values amount>: generates numbers and run your push_swap output through the checker with them as argument

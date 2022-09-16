@@ -3,10 +3,10 @@ import subprocess
 import random
 import sys
 
-def generate_values():
+def generate_values(n):
 	array = []
 	dup_map  = {}
-	for i in range(int(sys.argv[1])):
+	for i in range(n):
 		while True:
 			new_random = random.randint(-2147483648, 2147483647)
 			if dup_map.get(new_random) == True:
@@ -25,20 +25,22 @@ def main():
 	# Arguments parsing
 	noexe = False
 	length = len(sys.argv)
-	help_msg = "Error: not enough arguments\nUsage:\tpython3 tester.py <values amount>: prints the desired amount of random numbers without duplicates\n\tpython3 tester.py <values amount> <push_swap path> <checker path>: run your push_swap output through the checker"
+	help_msg = "Error: not enough arguments\nUsage:\tpython3 tester.py <values amount>: prints the desired amount of random numbers without duplicates\n\tpython3 tester.py <push_swap path> <checker path> <values amount>: run your push_swap output through the checker"
 	if length < 2:
 		print(help_msg)
 		raise Exception
-	elif length < 3:
+	elif length == 3:
+		num = int(sys.argv[1])
 		noexe = True
 	elif length < 4:
 		print(help_msg)
 		raise Exception
 	else:
-		push_swap_path = str_to_path(str(sys.argv[2]))
-		checker_path = str_to_path(str(sys.argv[3]))
+		num = int(sys.argv[3])
+		push_swap_path = str_to_path(str(sys.argv[1]))
+		checker_path = str_to_path(str(sys.argv[2]))
 	# Execution
-	array = generate_values()
+	array = generate_values(num)
 	if noexe:
 		args = ""
 		for n in array:
@@ -55,6 +57,6 @@ if __name__ == "__main__":
 	sys.stderr = open("/dev/null", "w")
 	try:
 		main()
-	except:
-		print("\nProcess interrupted")
+	except Exception as e:
+		print("\nProcess interrupted:" + str(e))
 		exit(0)
