@@ -25,16 +25,16 @@ def main():
 	# Arguments parsing
 	noexe = False
 	length = len(sys.argv)
-	help_msg = "Error: not enough arguments\nUsage:\tpython3 tester.py <values amount>: prints the desired amount of random numbers without duplicates\n\tpython3 tester.py <push_swap path> <checker path> <values amount>: run your push_swap output through the checker"
+	help_msg = "Not enough arguments\nUsage:\tpython3 tester.py <values amount>: prints the desired amount of random numbers without duplicates\n\tpython3 tester.py <push_swap path> <checker path> <values amount>: run your push_swap output through the checker"
 	if length < 2:
-		raise Exception("Not enough arguments")
+		raise Exception(help_msg)
 	elif length == 2:
 		num = int(sys.argv[1])
 		if num <= 0:
 			raise ValueError("The value of <values amount> must be positive")
 		noexe = True
 	elif length < 4:
-		raise Exception("Not enough arguments")
+		raise Exception(help_msg)
 	else:
 		num = int(sys.argv[3])
 		if num <= 0:
@@ -60,5 +60,5 @@ if __name__ == "__main__":
 	try:
 		main()
 	except Exception as e:
-		print("\nProcess interrupted:" + str(e))
+		print("\nProcess interrupted: " + str(e))
 		exit(0)
