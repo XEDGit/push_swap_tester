@@ -27,16 +27,18 @@ def main():
 	length = len(sys.argv)
 	help_msg = "Error: not enough arguments\nUsage:\tpython3 tester.py <values amount>: prints the desired amount of random numbers without duplicates\n\tpython3 tester.py <push_swap path> <checker path> <values amount>: run your push_swap output through the checker"
 	if length < 2:
-		print(help_msg)
-		raise Exception
-	elif length == 3:
+		raise Exception("Not enough arguments")
+	elif length == 2:
 		num = int(sys.argv[1])
+		if num <= 0:
+			raise ValueError("The value of <values amount> must be positive")
 		noexe = True
 	elif length < 4:
-		print(help_msg)
-		raise Exception
+		raise Exception("Not enough arguments")
 	else:
 		num = int(sys.argv[3])
+		if num <= 0:
+			raise ValueError("The value of <values amount> must be positive")
 		push_swap_path = str_to_path(str(sys.argv[1]))
 		checker_path = str_to_path(str(sys.argv[2]))
 	# Execution
